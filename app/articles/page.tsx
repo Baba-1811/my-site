@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAllArticles } from '@/lib/articles'
+import Search from '@/components/Search'
 
 export default function ArticlesPage() {
   const articles = getAllArticles()
@@ -7,6 +8,7 @@ export default function ArticlesPage() {
   return (
     <main className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8">記事一覧</h1>
+      <Search articles={articles} />
       <ul className="space-y-6">
         {articles.map(article => (
           <li key={article.slug} className="border border-gray-200 rounded-lg p-6">
