@@ -4,9 +4,29 @@ import remarkGfm from 'remark-gfm'
 import CodeBlock from '@/components/CodeBlock'
 import DownloadButton from '@/components/DownloadButton'
 
-export async function generateStaticParams() {
-  const articles = getAllArticles()
-  return articles.map(article => ({ slug: article.slug }))
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const article = getArticleBySlug(slug)
+
+  return {
+    title: article.title,
+    description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: `https://my-site-chi-lime.vercel.app/articles/${slug}`,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary',
+      title: article.title,
+      description: article.excerpt,
+    },
+  }
 }
 
 export default async function ArticlePage({

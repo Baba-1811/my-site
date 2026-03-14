@@ -14,8 +14,24 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: '研究・開発効率化ナレッジベース',
-  description: 'Python自動化・環境構築・情報系理論・研究効率化に関する技術記事とツール',
+  title: {
+    default: '研究・開発効率化ナレッジベース',
+    template: '%s | KB',
+  },
+  description: 'Python自動化・環境構築・情報系理論・研究効率化に関する技術記事とツールをまとめています。',
+  openGraph: {
+    title: '研究・開発効率化ナレッジベース',
+    description: 'Python自動化・環境構築・情報系理論・研究効率化に関する技術記事とツールをまとめています。',
+    url: 'https://my-site-chi-lime.vercel.app',
+    siteName: 'KB',
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: '研究・開発効率化ナレッジベース',
+    description: 'Python自動化・環境構築・情報系理論・研究効率化に関する技術記事とツールをまとめています。',
+  },
 }
 
 export default function RootLayout({
