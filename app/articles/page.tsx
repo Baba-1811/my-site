@@ -19,9 +19,13 @@ export default function ArticlesPage() {
             <p className="text-gray-700 mt-2">{article.excerpt}</p>
             <div className="flex gap-2 mt-3">
               {article.tags.map(tag => (
-                <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                  {tag}
-                </span>
+                <Link
+                  key={tag}
+                  href={`/tags/${tag}`}
+                  className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded hover:bg-gray-200 transition"
+                >
+                  #{tag}
+                </Link>
               ))}
             </div>
           </li>
