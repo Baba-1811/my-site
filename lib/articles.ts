@@ -18,6 +18,12 @@ export type Article = ArticleMeta & {
   content: string
 }
 
+export type TocItem = {
+  id: string
+  text: string
+  level: number
+}
+
 export function getAllArticles(): ArticleMeta[] {
   const files = fs.readdirSync(ARTICLES_DIR)
   return files
@@ -55,4 +61,25 @@ export function getAllTags(): string[] {
   const articles = getAllArticles()
   const tags = articles.flatMap(a => a.tags ?? [])
   return [...new Set(tags)]
+}
+
+export function extractToc(content: string): TocItem[] {
+  const lines = content.split('\n')
+  const toc: TocItem[] = []
+
+  for (const line of lines) {
+    const match = line.match(/^(#{2,3})\s+(.+)/)
+    if (match) {
+      const level = match[1].length
+      const text = match[2].trim()
+      const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\u3040-\u9fff\u30a0-\u30ff]/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+      toc.push({ id, text, level })
+    }
+  }
+
+  return toc
 }
