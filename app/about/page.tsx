@@ -1,26 +1,20 @@
 export default function AboutPage() {
   const techs = ['Python', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Linux', 'Git']
-
   return (
     <main className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8">About</h1>
-
       <section className="mb-10">
         <h2 className="text-xl font-semibold mb-3">このサイトについて</h2>
         <p className="text-gray-600 leading-relaxed">
           研究・開発の過程で得た知識を整理・再利用するためのナレッジベースです。
-          Python自動化・環境構築・情報系理論・研究効率化に関する記事とツールを公開しています。
         </p>
       </section>
-
       <section className="mb-10">
         <h2 className="text-xl font-semibold mb-3">自己紹介</h2>
         <p className="text-gray-600 leading-relaxed">
           大学院で研究をしながらWeb開発・Python自動化に取り組んでいます。
-          CFDやデータ解析を効率化するツールを作りながら、学んだことをこのサイトにまとめています。
         </p>
       </section>
-
       <section className="mb-10">
         <h2 className="text-xl font-semibold mb-3">技術スタック</h2>
         <div className="flex flex-wrap gap-2">
@@ -31,17 +25,10 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-
       <section>
         <h2 className="text-xl font-semibold mb-3">リンク</h2>
         <div className="flex gap-4">
-          
-            href="https://github.com/Baba-1811"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-700 hover:underline">
-            GitHub
-          </a>
+          <a href="https://github.com/Baba-1811" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:underline">GitHub</a>
         </div>
       </section>
     </main>
