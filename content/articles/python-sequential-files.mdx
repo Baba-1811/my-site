@@ -1,0 +1,36 @@
+---
+title: Pythonで連番ファイルを生成する方法
+date: 2026-03-14
+category: Python
+tags: [automation, beginner, snippet]
+excerpt: 研究や開発で大量のファイルを一括生成したいときに使えるPythonスクリプトを解説します。
+draft: false
+---
+
+## はじめに
+
+研究で実験データを整理するとき、`data_001.txt` から `data_100.txt` まで連番のファイルを一括で作りたい場面はよくあります。手作業でやると時間がかかるうえにミスも起きます。Pythonなら10行以内で解決できます。
+
+## コード
+```python
+import os
+
+def generate_files(prefix, start, end, ext, output_dir="."):
+    os.makedirs(output_dir, exist_ok=True)
+    for i in range(start, end + 1):
+        filename = f"{prefix}_{i:03d}.{ext}"
+        filepath = os.path.join(output_dir, filename)
+        with open(filepath, "w") as f:
+            f.write(f"# {filename}\n")
+    print(f"{end - start + 1}個のファイルを生成しました")
+
+generate_files("data", 1, 10, "txt", "output")
+```
+
+## コードの解説
+
+`i:03d` は「3桁のゼロ埋め」という意味です。`1` を渡すと `001` になります。`os.makedirs` は出力先フォルダが存在しない場合に自動で作成します。`exist_ok=True` をつけることで、フォルダが既に存在してもエラーにならないようにしています。
+
+## 使い方
+
+`prefix` にファイル名の接頭辞、`start` と `end` に開始・終了番号、`ext` に拡張子を渡します。たとえば `generate_files("result", 1, 50, "csv", "data")` とすれば `data/result_001.csv` から `data/result_050.csv` まで50個のファイルが生成されます。
