@@ -1,6 +1,8 @@
 import { getAllArticles, getArticleBySlug } from '@/lib/articles'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
+import CodeBlock from '@/components/CodeBlock'
+import DownloadButton from '@/components/DownloadButton'
 
 export async function generateStaticParams() {
   const articles = getAllArticles()
@@ -40,6 +42,18 @@ export default async function ArticlePage({
             mdxOptions: {
               remarkPlugins: [remarkGfm],
             },
+          }}
+          components={{
+            pre: ({ children }) => <>{children}</>,
+            code: ({ className, children }) => {
+              const isInline = !className
+              return (
+                <CodeBlock className={className} inline={isInline}>
+                  {String(children).replace(/\n$/, '')}
+                </CodeBlock>
+              )
+            },
+            DownloadButton,
           }}
         />
       </article>
